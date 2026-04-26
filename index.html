@@ -1222,10 +1222,15 @@ function updateKPIs(idx) {
   fields.forEach(f => {
     document.getElementById(f.vId).textContent = fmt(f.cur);
     const cor = corDiff(f.cur, f.prev, f.m);
-    const delta = f.cur - f.prev;
-    const seta = delta > 0 ? "▲ " : delta < 0 ? "▼ " : "";
-    const de = document.getElementById(f.dId);
-    de.textContent = seta + diffStr(f.cur, f.prev);
+    if (f.prev === null) {
+  document.getElementById(f.dId).textContent = '—';
+  document.getElementById(f.pId).textContent = '';
+  return;
+}
+const delta = f.cur - f.prev;
+const seta = delta > 0 ? "▲ " : delta < 0 ? "▼ " : "";
+const de = document.getElementById(f.dId);
+de.textContent = seta + diffStr(f.cur, f.prev);
     de.style.color  = cor;
     const pe = document.getElementById(f.pId);
     pe.textContent = "(" + pctStr(f.cur, f.prev) + ")";
@@ -1280,9 +1285,9 @@ function updateTable(idx) {
     tr.innerHTML =
       `<td>${l.label}</td>` +
       `<td style="font-weight:800">${fmt(l.cur)}</td>` +
-      `<td>${fmt(l.prev)}</td>` +
-      `<td><span class="td-diff" style="color:${cor}">${seta} ${diffStr(l.cur, l.prev)}</span></td>` +
-      `<td style="color:${cor};font-weight:800">${pctStr(l.cur, l.prev)}</td>`;
+      `<td>${l.prev !== null ? fmt(l.prev) : '—'}</td>` +
+      `<td><span class="td-diff"...>${l.prev !== null ? seta + ' ' + diffStr(l.cur, l.prev) : '—'}</span></td>` +
+      `<td ...>${l.prev !== null ? pctStr(l.cur, l.prev) : '—'}</td>`;
     tbody.appendChild(tr);
   });
 }
@@ -1676,7 +1681,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-  });
+  });  
 /* ── Gráfico Avaliações ─────────────────────────────── */
 avalInst = new Chart(document.getElementById('avalChart'), {
   type: 'bar',
@@ -1720,8 +1725,9 @@ avalInst = new Chart(document.getElementById('avalChart'), {
     }
   }
 });
+
       updateDashboard();
-      
+
       // Timestamp de geração
       const agora = new Date();
       const ts = agora.toLocaleDateString('pt-BR') + ' às ' +
