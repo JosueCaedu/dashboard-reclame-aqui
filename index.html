@@ -384,18 +384,7 @@
   </style>
 </head>
 <body>
-<!-- ── Tela de senha ─────────────────────────────────── -->
-<div id="telaSenha" style="
-  position: fixed; inset: 0; z-index: 99999;
-  background: #1a5c38;
-  display: flex; align-items: center; justify-content: center;
-">
-  <div style="
-    background: #fff; border-radius: 16px;
-    padding: 40px 36px; width: 100%; max-width: 360px;
-    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-  ">
-    <div style="
+<div style="
       width: 56px; height: 56px; background: #e8f5e9;
       border-radius: 50%; display: flex; align-items: center;
       justify-content: center; margin: 0 auto 18px;
@@ -805,34 +794,6 @@
 
 
 <script>
-  /* ── Controle de acesso ── */
-const SENHA_DASHBOARD = "Dash@123"; // ← troque pela senha desejada
-
-function verificarSenha() {
-  const input = document.getElementById('inputSenha');
-  const erro  = document.getElementById('errSenha');
-  if (input.value === SENHA_DASHBOARD) {
-    document.getElementById('telaSenha').style.display = 'none';
-    sessionStorage.setItem('auth', '1');
-  } else {
-    erro.textContent = 'Senha incorreta. Tente novamente.';
-    input.value = '';
-    input.focus();
-    input.style.borderColor = '#e53935';
-    setTimeout(() => {
-      input.style.borderColor = '#ccc';
-      erro.textContent = '';
-    }, 2500);
-  }
-}
-
-// Se já autenticou nessa sessão, pula a tela de senha
-if (sessionStorage.getItem('auth') === '1') {
-  document.addEventListener('DOMContentLoaded', () => {
-    const tela = document.getElementById('telaSenha');
-    if (tela) tela.style.display = 'none';
-  });
-}
 /* ================================================================
    DADOS — EDITE AQUI para adicionar novos dias
    Formato de cada objeto:
