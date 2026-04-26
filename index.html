@@ -1428,7 +1428,7 @@ function atualizarDados() {
     </svg>
     Atualizando...`;
 
-  fetch(SHEETS_URL)
+  fetch(SHEETS_URL + '&t=' + Date.now())
     .then(r => r.text())
     .then(csv => {
       DADOS = csvParaDados(csv);
@@ -1521,7 +1521,7 @@ function csvParaDados(csv) {
 
 window.addEventListener('DOMContentLoaded', () => {
   mostrarSkeleton();
-  fetch(SHEETS_URL)
+  fetch(SHEETS_URL + '&t=' + Date.now())
     .then(r => r.text())
     .then(csv => {
       DADOS = csvParaDados(csv);
