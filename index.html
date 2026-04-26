@@ -1086,11 +1086,11 @@ function exportarPPT() {
   s2.addText('INDICADORES DO DIA — ' + data, { x:0.3, y:0.15, w:12.7, h:0.8, fontSize:20, bold:true, color:BRANCO, fontFace:'Segoe UI' });
 
   const kpis = [
-    { label:'Total Acumulados', val:cur.acum, dif:diffStr(cur.acum,prev.acum), pct:pctStr(cur.acum,prev.acum), cor:'2e7d32' },
-    { label:'Entrantes Diarios',   val:cur.ent,  dif:diffStr(cur.ent,prev.ent),   pct:pctStr(cur.ent,prev.ent),   cor:'1565c0' },
-    { label:'Sem Tratativa',       val:cur.sem,  dif:diffStr(cur.sem,prev.sem),   pct:pctStr(cur.sem,prev.sem),   cor:'e65100' },
-    { label:'Pendentes',            val:cur.pend, dif:diffStr(cur.pend,prev.pend), pct:pctStr(cur.pend,prev.pend), cor:'f9a825' },
-    { label:'Finalizados',          val:cur.fin,  dif:diffStr(cur.fin,prev.fin),   pct:pctStr(cur.fin,prev.fin),   cor:'2e7d32' },
+   { label:'Total Acumulados', val:cur.acum, dif:diffStr(cur.acum,prev.acum), pct:pctStr(cur.acum,prev.acum), cor:'2e7d32' },
+   { label:'Entrantes Diarios', val:cur.ent,  dif:diffStr(cur.ent,prev.ent),   pct:pctStr(cur.ent,prev.ent),   cor:'1565c0' },
+   { label:'Sem Tratativa',     val:cur.sem,  dif:diffStr(cur.sem,prev.sem),   pct:pctStr(cur.sem,prev.sem),   cor:'e65100' },
+   { label:'Pendentes',         val:cur.pend, dif:diffStr(cur.pend,prev.pend), pct:pctStr(cur.pend,prev.pend), cor:'f9a825' },
+   { label:'Finalizados',       val:cur.fin,  dif:diffStr(cur.fin,prev.fin),   pct:pctStr(cur.fin,prev.fin),   cor:'2e7d32' },
   ];
   kpis.forEach((k, i) => {
     const x = 0.27 + i * 2.53;
@@ -1720,7 +1720,6 @@ avalInst = new Chart(document.getElementById('avalChart'), {
     }
   }
 });
- updateDashboard();
 
       // Timestamp de geração
       const agora = new Date();
