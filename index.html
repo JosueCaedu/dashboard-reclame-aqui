@@ -1518,6 +1518,7 @@ window.addEventListener('DOMContentLoaded', () => {
     .then(r => r.text())
     .then(csv => {
       DADOS = csvParaDados(csv);
+      removerSkeleton();
       popularDatas();
 
   // ── Popular selects de período personalizado ─────────────
