@@ -1425,8 +1425,6 @@ function atualizarDados() {
       });
       document.getElementById('customAte').value = DADOS.length - 1;
       customAte = DADOS.length - 1;
-
-      popularDatas();
       updateDashboard();
       showToast('✓ Dados atualizados com sucesso!');
     })
@@ -1519,7 +1517,7 @@ window.addEventListener('DOMContentLoaded', () => {
     .then(csv => {
       DADOS = csvParaDados(csv);
       removerSkeleton();
-      popularDatas();
+      
 
   // ── Popular selects de período personalizado ─────────────
   ['customDe','customAte'].forEach(selId => {
