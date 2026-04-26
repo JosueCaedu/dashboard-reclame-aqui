@@ -1285,7 +1285,7 @@ function updateDashboard() {
    INICIALIZAÇÃO DOS GRÁFICOS
 ================================================================ */
 function csvParaDados(csv) {
-  const linhas = csv.trim().split('\n').slice(2); // pula título, instrução, cabeçalho e campo
+  const linhas = csv.trim().split('\n').slice(1); // pula título, instrução, cabeçalho e campo
   return linhas
     .map(l => l.split(',').map(v => v.trim().replace(/^"|"$/g, '')))
     .filter(col => col[0]) // ignora linhas vazias
