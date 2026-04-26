@@ -1158,14 +1158,30 @@ function exportarPPT() {
 ================================================================ */
 function popularDatas() {
   const sel = document.getElementById('dateSelect');
+  sel.innerHTML = '';
   DADOS.forEach((d, i) => {
     const opt = document.createElement('option');
     opt.value = i;
     const ano = new Date().getFullYear();
-opt.textContent = d.date + "/" + ano;
+    opt.textContent = d.date + "/" + ano;
     sel.appendChild(opt);
   });
-  sel.value = DADOS.length - 1; // seleciona o último dia
+  sel.value = DADOS.length - 1;
+}
+
+function popularSelects() {
+  ['customDe','customAte'].forEach(selId => {
+    const sel = document.getElementById(selId);
+    sel.innerHTML = '';
+    DADOS.forEach((d, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = d.date;
+      sel.appendChild(opt);
+    });
+  });
+  document.getElementById('customAte').value = DADOS.length - 1;
+  customAte = DADOS.length - 1;
 }
 
 
@@ -1411,20 +1427,8 @@ function atualizarDados() {
     .then(r => r.text())
     .then(csv => {
       DADOS = csvParaDados(csv);
-
-      // Limpa e repopula os selects de período
-      ['customDe','customAte'].forEach(selId => {
-        const sel = document.getElementById(selId);
-        sel.innerHTML = '';
-        DADOS.forEach((d, i) => {
-          const opt = document.createElement('option');
-          opt.value = i;
-          opt.textContent = d.date;
-          sel.appendChild(opt);
-        });
-      });
-      document.getElementById('customAte').value = DADOS.length - 1;
-      customAte = DADOS.length - 1;
+      popularDatas();
+      popularSelects();
       updateDashboard();
       showToast('✓ Dados atualizados com sucesso!');
     })
@@ -1517,20 +1521,8 @@ window.addEventListener('DOMContentLoaded', () => {
     .then(csv => {
       DADOS = csvParaDados(csv);
       removerSkeleton();
-      
-
-  // ── Popular selects de período personalizado ─────────────
-  ['customDe','customAte'].forEach(selId => {
-    const sel = document.getElementById(selId);
-    DADOS.forEach((d, i) => {
-      const opt = document.createElement('option');
-      opt.value = i;
-      opt.textContent = d.date;
-      sel.appendChild(opt);
-    });
-  });
-  document.getElementById('customAte').value = DADOS.length - 1;
-  customAte = DADOS.length - 1;
+      popularDatas();
+      popularSelects();
 
   // ── Donut ────────────────────────────────────────────────
   donutInst = new Chart(document.getElementById('donutChart'), {
