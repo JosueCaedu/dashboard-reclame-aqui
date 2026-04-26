@@ -1515,7 +1515,7 @@ function csvParaDados(csv) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-   mostrarSkeleton();
+  mostrarSkeleton();
   fetch(SHEETS_URL)
     .then(r => r.text())
     .then(csv => {
@@ -1730,7 +1730,8 @@ avalInst = new Chart(document.getElementById('avalChart'), {
       if (el) el.textContent = 'Visualizado em ' + ts;
     })
     .catch(() => {
-      alert('⚠ Não foi possível carregar o arquivo dados.json. Verifique se ele está na mesma pasta do HTML.');
+      removerSkeleton();
+      alert('⚠ Não foi possível carregar os dados do Google Sheets. Verifique sua conexão e tente novamente.');
     });
 });
 </script>
