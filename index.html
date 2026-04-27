@@ -1440,7 +1440,6 @@ window.addEventListener('DOMContentLoaded', () => {
     .then(r => r.text())
     .then(csv => {
       DADOS = csvParaDados(csv);
-      removerSkeleton();
       popularDatas();
       popularSelects();
 
@@ -1642,6 +1641,7 @@ avalInst = new Chart(document.getElementById('avalChart'), {
 });
 
       updateDashboard();
+      removerSkeleton();
 
       // Timestamp de geração
       const agora = new Date();
