@@ -1201,8 +1201,8 @@ function updateTable(idx) {
       `<td>${l.label}</td>` +
       `<td style="font-weight:800">${fmt(l.cur)}</td>` +
       `<td>${l.prev !== null ? fmt(l.prev) : '—'}</td>` +
-      `<td><span class="td-diff"...>${l.prev !== null ? seta + ' ' + diffStr(l.cur, l.prev) : '—'}</span></td>` +
-      `<td ...>${l.prev !== null ? pctStr(l.cur, l.prev) : '—'}</td>`;
+      `<td><span class="td-diff" style="color:${cor}">${l.prev !== null ? seta + ' ' + diffStr(l.cur, l.prev) : '—'}</span></td>` +
+      `<td style="font-weight:800; color:${cor}">${l.prev !== null ? pctStr(l.cur, l.prev) : '—'}</td>`;
     tbody.appendChild(tr);
   });
 }
