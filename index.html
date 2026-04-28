@@ -72,6 +72,7 @@
     .kpi-diff-row   { display: flex; align-items: center; gap: 5px; margin-top: 3px; }
     .kpi-diff { font-size: 12px; font-weight: 800; display: flex; align-items: center; gap: 2px; }
     .kpi-pct  { font-size: 11px; font-weight: 600; }
+    .kpi-ant  { font-size: 10px; color: #555; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
 
     /* ── Grade de 2 colunas ────────────────────────────────── */
     .two-col   { display: grid; grid-template-columns: 1.65fr 1fr; gap: 15px; }
@@ -522,12 +523,13 @@
         <span class="kpi-diff" id="d1">—</span>
         <span class="kpi-pct"  id="p1"></span>
       </div>
+      <div class="kpi-ant" id="ant1">—</div>
     </div>
 
     <div class="card">
       <div class="kpi-top">
         <div class="kpi-icon" style="background:#e3f2fd">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 5 19 12"5 12 12 5 19 12"5 12 12 5 19 12"5 12 12 5 19 12"5 12 12 5 19 12"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 5 19 12"/></svg>
         </div>
         <div class="kpi-label">Entrantes<br>Diários</div>
       </div>
@@ -537,6 +539,7 @@
         <span class="kpi-diff" id="d2">—</span>
         <span class="kpi-pct"  id="p2"></span>
       </div>
+      <div class="kpi-ant" id="ant2">—</div>
     </div>
 
     <div class="card">
@@ -552,6 +555,7 @@
         <span class="kpi-diff" id="d3">—</span>
         <span class="kpi-pct"  id="p3"></span>
       </div>
+      <div class="kpi-ant" id="ant3">—</div>
     </div>
 
     <div class="card">
@@ -567,6 +571,7 @@
         <span class="kpi-diff" id="d4">—</span>
         <span class="kpi-pct"  id="p4"></span>
       </div>
+      <div class="kpi-ant" id="ant4">—</div>
     </div>
 
     <div class="card">
@@ -582,6 +587,7 @@
         <span class="kpi-diff" id="d5">—</span>
         <span class="kpi-pct"  id="p5"></span>
       </div>
+      <div class="kpi-ant" id="ant5">—</div>
     </div>
 
     <div class="card">
@@ -597,6 +603,7 @@
         <span class="kpi-diff" id="d6">—</span>
         <span class="kpi-pct"  id="p6"></span>
       </div>
+      <div class="kpi-ant" id="ant6">—</div>
     </div>
 
   </div><!-- /kpi-row -->
@@ -1150,6 +1157,10 @@ de.textContent = seta + diffStr(f.cur, f.prev);
     const pe = document.getElementById(f.pId);
     pe.textContent = "(" + pctStr(f.cur, f.prev) + ")";
     pe.style.color  = cor;
+    const antEl = document.getElementById('ant' + f.vId.replace('kpi',''));
+if (antEl) {
+  antEl.innerHTML = f.prev !== null ? '↩ <strong>Ant:</strong> ' + fmt(f.prev) : '';
+}
   });
 }
 
@@ -1201,7 +1212,7 @@ function updateTable(idx) {
       `<td>${l.label}</td>` +
       `<td style="font-weight:800">${fmt(l.cur)}</td>` +
       `<td>${l.prev !== null ? fmt(l.prev) : '—'}</td>` +
-      `<td><span class="td-diff" style="color:${cor}">${l.prev !== null ? seta + ' ' + diffStr(l.cur, l.prev) : '—'}</span></td>` +
+      `<td><span class="td-diff"style="color:${cor}">${l.prev !== null ? seta + ' ' + diffStr(l.cur, l.prev) : '—'}</span></td>` +
       `<td style="font-weight:800; color:${cor}">${l.prev !== null ? pctStr(l.cur, l.prev) : '—'}</td>`;
     tbody.appendChild(tr);
   });
